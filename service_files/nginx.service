@@ -1,0 +1,14 @@
+[Unit]
+Description=Nginx Service
+PartOf=docker.service
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+WorkingDirectory=/opt/temple-iac/dockerized_apps
+ExecStart=/bin/docker-compose -f nginx-compose.yml up -d 
+ExecStop=/bin/docker-compose -f nginx-compose.yml down
+
+[Install]
+WantedBy=multi-user.target

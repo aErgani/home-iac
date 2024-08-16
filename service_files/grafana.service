@@ -1,0 +1,15 @@
+[Unit]
+Description=Grafana Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+RemainAfterExit=true
+User=root
+
+WorkingDirectory=/opt/temple-iac/dockerized_apps
+ExecStart=/bin/docker-compose -f grafana-compose.yml up -d 
+ExecStop=/bin/docker-compose -f grafana-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
