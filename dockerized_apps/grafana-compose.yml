@@ -1,0 +1,22 @@
+version: "3.8"
+services:
+  grafana:
+    image: grafana/grafana:11.1.1
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+     - '3000:3000'
+    volumes:
+      - /opt/app_data/grafana:/var/lib/grafana
+
+  prometheus:
+    image: prom/prometheus:v2.54.0
+    ports:
+      - '9090:9090'
+    volumes:
+      - /opt/app_data/prometheus:/etc/prometheus
+      - /opt/temple-iac/dockerized_apps/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--web.enable-lifecycle'
+    restart: always
