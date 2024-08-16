@@ -16,6 +16,24 @@ services:
     networks:
       - temple_network
 
+  qbittorrent:
+    image: linuxserver/qbittorrent:4.6.5
+    container_name: qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Istanbul
+      - WEBUI_PORT=8081
+      - TORRENTING_PORT=6881
+    volumes:
+      - /opt/app_data/qbittorent/data:/config
+      - /opt/app_data/qbittorent/blackhole:/downloads
+    ports:
+      - 8081:8081
+      - 6881:6881
+      - 6881:6881/udp
+    restart: unless-stopped
+
 networks:
   temple_network:
     external:
