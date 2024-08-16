@@ -1,6 +1,6 @@
 [Unit]
 Description=Nginx Service
-PartOf=docker.service
+Requires=docker.service
 After=docker.service
 
 [Service]
