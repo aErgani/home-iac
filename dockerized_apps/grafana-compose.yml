@@ -22,6 +22,9 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.enable-lifecycle'
+      - '--web.external-url=/prometheus/'
+      - '--web.route-prefix=/'
+      - '--storage.tsdb.retention.time=30d'
     restart: always
     networks:
       - temple_network

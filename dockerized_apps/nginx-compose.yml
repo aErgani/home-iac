@@ -4,7 +4,7 @@ services:
     image: nginx:1.27.0
     container_name: nginx
     volumes:
-      - /opt/temple-iac/dockerized_apps/nginx.conf
+      - /opt/temple-iac/dockerized_apps/nginx.conf:/etc/nginx/nginx.conf
     ports:
       - 80:80
       - 443:443
