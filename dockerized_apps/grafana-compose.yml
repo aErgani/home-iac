@@ -8,9 +8,12 @@ services:
      - '3000:3000'
     volumes:
       - /opt/app_data/grafana:/var/lib/grafana
+    networks:
+      - temple_network
 
   prometheus:
     image: prom/prometheus:v2.54.0
+    container_name: prometheus
     ports:
       - '9090:9090'
     volumes:
@@ -20,3 +23,10 @@ services:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.enable-lifecycle'
     restart: always
+    networks:
+      - temple_network
+
+networks:
+  temple_network:
+    external:
+      name: the_temple_network

@@ -8,4 +8,9 @@ services:
     ports:
       - 80:80
       - 443:443
+    networks:
+      - temple_network
 
+networks:
+  temple_network:
+    name: the_temple_network
