@@ -36,6 +36,24 @@ services:
     networks:
       - temple_network
 
+  jellyfin:
+    image: lscr.io/linuxserver/jellyfin:10.9.9
+    container_name: jellyfin
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Istanbul
+      - JELLYFIN_PublishedServerUrl=jellyfin.temple
+    volumes:
+      - /path/to/jellyfin/library:/config
+      - /path/to/tvseries:/data/tvshows
+      - /path/to/movies:/data/movies
+    ports:
+      - 8096:8096
+    restart: unless-stopped
+    networks:
+      - temple_network
+
 networks:
   temple_network:
     external:
