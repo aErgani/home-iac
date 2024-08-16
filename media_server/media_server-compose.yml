@@ -33,6 +33,8 @@ services:
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
+    networks:
+      - temple_network
 
 networks:
   temple_network:
