@@ -46,8 +46,8 @@ services:
       - JELLYFIN_PublishedServerUrl=jellyfin.temple
     volumes:
       - /opt/app_data/jellyfin/library:/config
-      - /path/to/tvseries:/data/tvshows
-      - /path/to/movies:/data/movies
+      - /opt/shows_temp:/data/tvshows
+      - /opt/movies_temp:/data/movies
     ports:
       - 8096:8096
     restart: unless-stopped
