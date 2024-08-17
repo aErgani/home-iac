@@ -63,7 +63,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/app_data/sonarr/data:/config
-      - /opt/app_data/tvseries:/tv #optional
+      - /opt/shows_temp:/tv #optional
       - /opt/app_data/downloadclient-downloads:/downloads #optional
     ports:
       - 8989:8989
@@ -80,7 +80,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /path/to/radarr/data:/config
-      - /opt/app_data/movies:/movies #optional
+      - /opt/movies_temp:/movies #optional
       - /opt/app_data/downloadclient-downloads:/downloads #optional
     ports:
       - 7878:7878
