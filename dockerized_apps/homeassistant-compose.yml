@@ -11,4 +11,4 @@ services:
     privileged: true
     network_mode: host
     environment:
-      DISABLE_JEMALLOC: true
+      DISABLE_JEMALLOC: 1
