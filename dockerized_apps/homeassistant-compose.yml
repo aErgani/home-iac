@@ -12,10 +12,3 @@ services:
     network_mode: host
     environment:
       DISABLE_JEMALLOC: 1
-    networks:
-      - temple_network
-
-networks:
-  temple_network:
-    external:
-      name: the_temple_network
