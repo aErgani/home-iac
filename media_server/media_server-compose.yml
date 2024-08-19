@@ -4,8 +4,8 @@ services:
     image: linuxserver/jackett:0.22.457
     container_name: jackett
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Europe/Istanbul
     volumes:
       - /opt/app_data/jackett/data:/config
@@ -20,8 +20,8 @@ services:
     image: linuxserver/qbittorrent:4.6.5
     container_name: qbittorrent
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Europe/Istanbul
       - WEBUI_PORT=8081
       - TORRENTING_PORT=6881
@@ -41,8 +41,8 @@ services:
     container_name: jellyfin
     hostname: jellyfin
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Europe/Istanbul
       - JELLYFIN_PublishedServerUrl=jellyfin.temple
     volumes:
@@ -58,8 +58,8 @@ services:
     image: linuxserver/sonarr:4.0.8
     container_name: sonarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Etc/UTC
     volumes:
       - /opt/app_data/sonarr/data:/config
@@ -74,8 +74,8 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=0
+      - PGID=0
       - TZ=Etc/UTC
     volumes:
       - /opt/app_data/sonarr/data:/config
