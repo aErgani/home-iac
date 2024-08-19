@@ -78,7 +78,7 @@ services:
       - PGID=0
       - TZ=Etc/UTC
     volumes:
-      - /opt/app_data/sonarr/data:/config
+      - /opt/app_data/radarr/data:/config
       - /media/temple_disk:/temple_disk #optional
     ports:
       - 7878:7878
