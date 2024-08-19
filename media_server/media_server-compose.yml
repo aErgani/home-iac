@@ -27,7 +27,7 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /opt/app_data/qbittorent/data:/config
-      - /opt/app_data/qbittorent/blackhole:/downloads
+      - /media/temple_disk/blackhole:/downloads
     ports:
       - 8081:8081
       - 6881:6881
@@ -47,8 +47,7 @@ services:
       - JELLYFIN_PublishedServerUrl=jellyfin.temple
     volumes:
       - /opt/app_data/jellyfin/library:/config
-      - /opt/shows_temp:/data/tvshows
-      - /opt/movies_temp:/data/movies
+      - /media/temple_disk:/data
     ports:
       - 8096:8096
     restart: unless-stopped
@@ -64,8 +63,7 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/app_data/sonarr/data:/config
-      - /opt/shows_temp:/tv #optional
-      - /opt/app_data/qbittorent/blackhole:/downloads #optional
+      - /media/temple_disk:/temple_disk #optional
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -80,9 +78,8 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - /path/to/radarr/data:/config
-      - /opt/movies_temp:/movies #optional
-      - /opt/app_data/downloadclient-downloads:/downloads #optional
+      - /opt/app_data/sonarr/data:/config
+      - /media/temple_disk:/temple_disk #optional
     ports:
       - 7878:7878
     restart: unless-stopped
