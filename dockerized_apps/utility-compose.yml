@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    ports:
+      - 9443:9443
+      volumes:
+        - /opt/appdata/portainer:/data
+        - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+  webtop:
+    image: lscr.io/linuxserver/webtop:latest
+    container_name: webtop
+    security_opt:
+      - seccomp:unconfined #optional
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Europe/Istanbul
+      - SUBFOLDER=/ #optional
+      - TITLE=Webtop #optional
+    volumes:
+      - /opt/app_data/webtop:/config
+      - /var/run/docker.sock:/var/run/docker.sock #optional
+    ports:
+      - 5000:5000
+      - 5001:5001
+    devices:
+      - /dev/dri:/dev/dri #optional
+    shm_size: "1gb" #optional
+    restart: unless-stopped
