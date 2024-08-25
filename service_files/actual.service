@@ -1,0 +1,16 @@
+[Unit]
+Description=Actual Service
+Requires=docker.service
+After=docker.service
+
+[Service]
+type=oneshot
+RemainAfterExit=yes
+User=root
+
+WorkingDirectory=/opt/temple-iac/dockerized_apps
+ExecStart=/bin/docker-compose -f actual-compose.yml up -d 
+ExecStop=/bin/docker-compose -f actual-compose.yml down
+
+[Install]
+WantedBy=multi-user.target
