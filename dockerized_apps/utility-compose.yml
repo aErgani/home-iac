@@ -10,6 +10,8 @@ services:
     - /opt/appdata/portainer:/data
     - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    networks:
+      - temple_network
 
   webtop:
     image: lscr.io/linuxserver/webtop:latest
@@ -32,3 +34,10 @@ services:
       - /dev/dri:/dev/dri #optional
     shm_size: "1gb" #optional
     restart: unless-stopped
+    networks:
+      - temple_network
+
+networks:
+  temple_network:
+    external:
+      name: the_temple_network
