@@ -14,7 +14,7 @@ services:
       - 9117:9117
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
   qbittorrent:
     image: linuxserver/qbittorrent:4.6.5
@@ -27,14 +27,14 @@ services:
       - TORRENTING_PORT=6881
     volumes:
       - /opt/app_data/qbittorent/data:/config
-      - /media/temple_disk/blackhole:/downloads
+      - /media/oculus_disk/blackhole:/downloads
     ports:
       - 8081:8081
       - 6881:6881
       - 6881:6881/udp
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
   jellyfin:
     image: linuxserver/jellyfin:10.9.9
@@ -47,12 +47,12 @@ services:
       - JELLYFIN_PublishedServerUrl=jellyfin.temple
     volumes:
       - /opt/app_data/jellyfin/library:/config
-      - /media/temple_disk:/data
+      - /media/oculus_disk:/data
     ports:
       - 8096:8096
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
   sonarr:
     image: linuxserver/sonarr:4.0.8
@@ -63,13 +63,13 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/app_data/sonarr/data:/config
-      - /media/temple_disk:/temple_disk #optional
-      - /media/temple_disk/blackhole:/downloads #optional
+      - /media/oculus_disk:/oculus_disk #optional
+      - /media/oculus_disk/blackhole:/downloads #optional
     ports:
       - 8989:8989
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -80,15 +80,15 @@ services:
       - TZ=Etc/UTC
     volumes:
       - /opt/app_data/radarr/data:/config
-      - /media/temple_disk:/temple_disk #optional
-      - /media/temple_disk/blackhole:/downloads #optional
+      - /media/oculus_disk:/oculus_disk #optional
+      - /media/oculus_disk/blackhole:/downloads #optional
     ports:
       - 7878:7878
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
 networks:
-  temple_network:
+  home_network:
     external:
-      name: the_temple_network
+      name: the_home_network

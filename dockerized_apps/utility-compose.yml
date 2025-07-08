@@ -11,7 +11,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
   webtop:
     image: lscr.io/linuxserver/webtop:latest
@@ -35,9 +35,9 @@ services:
     shm_size: "1gb" #optional
     restart: unless-stopped
     networks:
-      - temple_network
+      - home_network
 
 networks:
-  temple_network:
+  home_network:
     external:
-      name: the_temple_network
+      name: the_home_network

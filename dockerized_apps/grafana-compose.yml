@@ -8,7 +8,7 @@ services:
      - '3000:3000'
     volumes:
       - /opt/app_data/grafana:/var/lib/grafana
-      - /opt/temple-iac/dockerized_apps/grafana.ini:/etc/grafana/grafana.ini
+      - /opt/home-iac/dockerized_apps/grafana.ini:/etc/grafana/grafana.ini
     environment:
       - GF_SECURITY_ADMIN=ergani
       - GF_SERVER_HTTP_PORT=3000
@@ -23,7 +23,7 @@ services:
       - '9090:9090'
     volumes:
       - /opt/app_data/prometheus:/etc/prometheus
-      - /opt/temple-iac/dockerized_apps/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /opt/home-iac/dockerized_apps/prometheus.yml:/etc/prometheus/prometheus.yml
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.enable-lifecycle'

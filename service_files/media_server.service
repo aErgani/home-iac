@@ -8,7 +8,7 @@ type=oneshot
 RemainAfterExit=yes
 User=root
 
-WorkingDirectory=/opt/temple-iac/media_server
+WorkingDirectory=/opt/home-iac/media_server
 ExecStart=/bin/docker-compose -f media_server-compose.yml up -d 
 ExecStop=/bin/docker-compose -f media_server-compose.yml down
 

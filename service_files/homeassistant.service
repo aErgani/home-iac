@@ -8,7 +8,7 @@ type=oneshot
 RemainAfterExit=yes
 User=root
 
-WorkingDirectory=/opt/temple-iac/dockerized_apps
+WorkingDirectory=/opt/home-iac/dockerized_apps
 ExecStart=/bin/docker-compose -f homeassistant-compose.yml up -d 
 ExecStop=/bin/docker-compose -f homeassistant-compose.yml down
 
