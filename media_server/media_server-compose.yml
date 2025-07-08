@@ -39,6 +39,7 @@ services:
   jellyfin:
     image: linuxserver/jellyfin:latest
     hostname: jellyfin
+    container_name: jellyfin
     environment:
       - PUID=0
       - PGID=0
