@@ -14,7 +14,7 @@ services:
       - GF_SERVER_HTTP_PORT=3000
       - GF_PATHS_CONFIG=/etc/grafana/grafana.ini
     networks:
-      - temple_network
+      - home_network
 
   prometheus:
     image: prom/prometheus:v2.54.0
@@ -32,9 +32,9 @@ services:
       - '--storage.tsdb.retention.time=30d'
     restart: always
     networks:
-      - temple_network
+      - home_network
 
 networks:
-  temple_network:
+  home_network:
     external:
-      name: the_temple_network
+      name: the_home_network
