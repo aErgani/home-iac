@@ -8,7 +8,7 @@ type=oneshot
 RemainAfterExit=yes
 User=root
 
-WorkingDirectory=/opt/home-iac/dockerized_apps
+WorkingDirectory=/opt/home-iac/media_server
 ExecStart=/bin/docker-compose -f nginx-compose.yml up -d 
 ExecStop=/bin/docker-compose -f nginx-compose.yml down
 
