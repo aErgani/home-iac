@@ -14,4 +14,5 @@ services:
 
 networks:
   home_network:
-    name: the_home_network
+    external:
+      name: the_home_network
