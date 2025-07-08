@@ -13,5 +13,5 @@ services:
       - home_network
 
 networks:
-  temple_network:
+  home_network:
     name: the_home_network
