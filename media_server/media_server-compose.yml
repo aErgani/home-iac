@@ -44,7 +44,7 @@ services:
       - PUID=0
       - PGID=0
       - TZ=Europe/Istanbul
-      - JELLYFIN_PublishedServerUrl=jellyfin.temple
+      - JELLYFIN_PublishedServerUrl=oculus/jellyfin
     volumes:
       - /opt/app_data/jellyfin/library:/config
       - /media/oculus_disk:/data

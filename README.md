@@ -1,2 +1,2 @@
-# temple-iac
-Infra As Code repo for Raspberry PI
+# home-iac
+Infra As Code repo for Oculus VM
