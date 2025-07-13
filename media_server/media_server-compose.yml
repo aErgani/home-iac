@@ -88,6 +88,23 @@ services:
     networks:
       - home_network
 
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=0
+      - PGID=0
+      - TZ=Etc/UTC
+    volumes:
+      - /opt/app_data/bazarr/data:/config
+      - /media/oculus_disk:/oculus_disk #optional
+      - /media/oculus_disk/blackhole:/downloads #optional
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+    networks:
+      - home_network
+
 networks:
   home_network:
     external:
