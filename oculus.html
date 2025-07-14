@@ -1,156 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="OCULUS - Ergani Household Media Server Gateway.">
-    <meta name="keywords" content="Grafana, Prometheus, Jackett, Plex, Sonarr, Radarr, Overseerr">
-    <title>OCULUS</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: url('https://a1.mzstatic.com/r40/Music124/v4/a0/19/34/a01934b0-7663-3472-23e1-609ec2d67f75/artwork.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
-        .header {
-            width: 100%;
-            background: rgba(51, 51, 51, 0.8);
-            color: #ff4d4d;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            margin-bottom: 50px; /* Adjusted margin to bring header closer to the content */
-            position: relative;
-            z-index: 10;
-        }
-        .header h1 {
-            font-size: 4em;
-            margin: 0;
-            font-weight: 900;
-            letter-spacing: 4px;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
-        }
-        .main-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: left; /* Center the container horizontally */
-            padding: 0 20px;
-        }
-        .container {
-            width: 400px;
-            background: rgba(30, 30, 30, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
-            padding: 30px;
-            box-sizing: border-box;
-            text-align: center;
-            margin-top: -30px; /* Move the container up */
-        }
-        h1 {
-            color: #ff4d4d;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-            font-weight: 700;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        li {
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 8px;
-            background: #2a2a2a;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-            transition: background 0.3s, transform 0.3s;
-        }
-        li:hover {
-            background: #3a3a3a;
-            transform: translateY(-5px);
-        }
-        a {
-            text-decoration: none;
-            color: #ff4d4d;
-            font-weight: 600;
-            transition: color 0.3s;
-        }
-        a:hover {
-            color: #ff6666;
-            text-decoration: underline;
-        }
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 2em;
-            }
-            .container {
-                width: 90%;
-                padding: 20px;
-            }
-        }
-        .background-container {
-            position: relative;
-            width: 100vw;
-            height: calc(100vw * 9 / 16);
-            max-height: 100vh;
-            margin: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .overlay {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start; /* align to the left */
-            justify-content: flex-start; /* align to the top */
-            color: #e0e0e0;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .main-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: flex-start; /* align to left */
-            padding: 0 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="OCULUS - Ergani Household Media Server Gateway." />
+  <meta name="keywords" content="Grafana, Prometheus, Jackett, Plex, Sonarr, Radarr, Overseerr" />
+  <title>OCULUS</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: black;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #e0e0e0;
+    }
+
+    .background-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh; /* Full screen */
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .background-image {
+      position: absolute;
+      width: auto;
+      height: 100vh; /* Image never taller than screen */
+      background: url('https://a1.mzstatic.com/r40/Music124/v4/a0/19/34/a01934b0-7663-3472-23e1-609ec2d67f75/artwork.jpg') no-repeat center center;
+      background-size: contain;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.3; /* Optional dimming */
+    }
+
+    .overlay {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .header {
+      width: 100%;
+      background: rgba(51, 51, 51, 0.8);
+      color: #ff4d4d;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      margin-bottom: 30px;
+      z-index: 10;
+    }
+
+    .header h1 {
+      font-size: 4em;
+      margin: 0;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+    }
+
+    .main-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      padding: 0 20px;
+    }
+
+    .container {
+      width: 400px;
+      background: rgba(30, 30, 30, 0.9);
+      border-radius: 12px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      box-sizing: border-box;
+      text-align: center;
+      margin-top: -10px;
+    }
+
+    h1 {
+      color: #ff4d4d;
+      margin-bottom: 20px;
+      font-size: 2.5em;
+      font-weight: 700;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 15px 0;
+      padding: 15px;
+      border-radius: 8px;
+      background: #2a2a2a;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    li:hover {
+      background: #3a3a3a;
+      transform: translateY(-5px);
+    }
+
+    a {
+      text-decoration: none;
+      color: #ff4d4d;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #ff6666;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 2em;
+      }
+      .container {
+        width: 90%;
+        padding: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="background-container">
-        <div class="background-image"></div>
-        <div class="overlay">
-            <div class="header">
-                <h1>OCULUS</h1>
-            </div>
-            <div class="main-wrapper">
-                <div class="container">
-                    <h1>Paths</h1>
-                    <ul>
-                        <li><a href="http://oculus/grafana" target="_blank">Grafana</a></li>
-                        <li><a href="http://homeassistant.oculus" target="_blank">Home Assistant</a></li>
-                        <li><a href="http://oculus/jackett" target="_blank">Jackett</a></li>
-                        <li><a href="http://oculus/jellyfin" target="_blank">Jellyfin</a></li>
-                        <li><a href="http://oculus/qbittorrent" target="_blank">QBittorrent</a></li>
-                        <li><a href="http://oculus/sonarr" target="_blank">Sonarr</a></li>
-                        <li><a href="http://oculus/radarr" target="_blank">Radarr</a></li>
-                        <li><a href="http://oculus/bazarr" target="_blank">Bazarr</a></li>
-                    </ul>
-                </div>
-            </div>
+  <div class="background-container">
+    <div class="background-image"></div>
+    <div class="overlay">
+      <div class="header">
+        <h1>OCULUS</h1>
+      </div>
+      <div class="main-wrapper">
+        <div class="container">
+          <h1>Paths</h1>
+          <ul>
+            <li><a href="http://oculus/grafana" target="_blank" rel="noopener noreferrer">Grafana</a></li>
+            <li><a href="http://homeassistant.oculus" target="_blank" rel="noopener noreferrer">Home Assistant</a></li>
+            <li><a href="http://oculus/jackett" target="_blank" rel="noopener noreferrer">Jackett</a></li>
+            <li><a href="http://oculus/jellyfin" target="_blank" rel="noopener noreferrer">Jellyfin</a></li>
+            <li><a href="http://oculus/qbittorrent" target="_blank" rel="noopener noreferrer">QBittorrent</a></li>
+            <li><a href="http://oculus/sonarr" target="_blank" rel="noopener noreferrer">Sonarr</a></li>
+            <li><a href="http://oculus/radarr" target="_blank" rel="noopener noreferrer">Radarr</a></li>
+            <li><a href="http://oculus/bazarr" target="_blank" rel="noopener noreferrer">Bazarr</a></li>
+          </ul>
         </div>
+      </div>
     </div>
+  </div>
 </body>
 </html>
