@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  nginx:
+    image: nginx:1.27.0
+    container_name: nginx
+    volumes:
+      - /opt/home-iac/media_server/media_server_nginx.conf:/etc/nginx/nginx.conf
+      - /opt/home-iac/oculus.html:/etc/nginx/oculus.html
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - home_network
+
+networks:
+  home_network:
+    external:
+      name: the_home_network
