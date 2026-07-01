@@ -21,6 +21,9 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+      /* Initial state for the entire scene fade-in */
+      opacity: 0;
+      animation: sceneFadeInZoom 4s ease-out forwards;
     }
 
     .background-image {
@@ -33,26 +36,113 @@
       display: block;
       z-index: 0;
       pointer-events: none;
-      /* Animation applied here */
-      opacity: 0;
-      animation: fadeInZoom 4s ease-out forwards;
     }
 
-    /* Keyframes for the slow fade-in and slight zoom effect */
-    @keyframes fadeInZoom {
+    /* --- THE MECHANICUS EFFECTS --- */
+    
+    /* Flickering Eye Overlay */
+    .eye-glow {
+      position: absolute;
+      /* Positioning precisely over the red lens on the right side of the skull */
+      top: 56.6%; 
+      left: 66.8%;
+      width: 1.8vw;
+      height: 1.8vw;
+      max-width: 25px;
+      max-height: 25px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(255,50,50,1) 0%, rgba(255,0,0,0.7) 40%, rgba(255,0,0,0) 70%);
+      border-radius: 50%;
+      z-index: 1;
+      mix-blend-mode: screen;
+      animation: eyeFlicker 0.8s infinite alternate;
+      pointer-events: none;
+    }
+
+    /* Spark System container near the cybernetics */
+    .spark-container {
+      position: absolute;
+      top: 52%;
+      left: 62%;
+      width: 100px;
+      height: 100px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .spark {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background-color: #ffaa44;
+      box-shadow: 0 0 8px #ff4500;
+      border-radius: 50%;
+      opacity: 0;
+    }
+
+    /* Randomize individual spark timings/trajectories */
+    .spark:nth-child(1) { animation: sparkBurst1 3s infinite 0.5s; }
+    .spark:nth-child(2) { animation: sparkBurst2 3s infinite 1.2s; }
+    .spark:nth-child(3) { animation: sparkBurst3 3s infinite 2.1s; }
+
+    /* --- ANIMATIONS --- */
+
+    /* Scene Entrance */
+    @keyframes sceneFadeInZoom {
       0% {
         opacity: 0;
         transform: scale(1);
       }
       100% {
-        opacity: 0.9; /* Matches your original opacity */
-        transform: scale(1.05); /* Adjust to 1.1 if you want a stronger zoom */
+        opacity: 0.95;
+        transform: scale(1.04);
       }
     }
 
-    .overlay {
+    /* Omnissiah-approved Eye Malfunction */
+    @keyframes eyeFlicker {
+      0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
+      5% { opacity: 0.9; }
+      10% { opacity: 0.4; }
+      12% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); filter: drop-shadow(0 0 5px red); }
+      14% { opacity: 0.2; }
+      20% { opacity: 0.8; }
+      22% { opacity: 0.3; }
+      60% { opacity: 0.9; }
+      64% { opacity: 0.4; }
+      70% { opacity: 1; }
+      78% { opacity: 0.3; }
+    }
+
+    /* Trajectories for the sparks shooting out */
+    @keyframes sparkBurst1 {
+      0% { opacity: 0; transform: translate(0, 0) scale(1); }
+      1% { opacity: 1; }
+      15% { opacity: 1; transform: translate(-40px, -20px) scale(0.5); }
+      20% { opacity: 0; transform: translate(-50px, -15px) scale(0); }
+      100% { opacity: 0; }
+    }
+
+    @keyframes sparkBurst2 {
+      0% { opacity: 0; transform: translate(10px, -5px) scale(1); }
+      2% { opacity: 1; }
+      10% { opacity: 1; transform: translate(30px, -40px) scale(0.6); }
+      15% { opacity: 0; transform: translate(45px, -55px) scale(0); }
+      100% { opacity: 0; }
+    }
+
+    @keyframes sparkBurst3 {
+      0% { opacity: 0; transform: translate(-5px, 10px) scale(1); }
+      1% { opacity: 1; }
+      12% { opacity: 1; transform: translate(-15px, 45px) scale(0.4); }
+      18% { opacity: 0; transform: translate(-20px, 60px) scale(0); }
+      100% { opacity: 0; }
+    }
+
+    /* --- THE REST OF YOUR CSS --- */
+    .overlay-ui {
       position: relative;
-      z-index: 1;
+      z-index: 10;
       width: 100%;
       height: 100%;
       display: flex;
@@ -139,24 +229,30 @@
     }
 
     @media (max-width: 768px) {
-      .header h1 {
-        font-size: 2em;
-      }
-      .container {
-        width: 90%;
-        padding: 20px;
-      }
+      .header h1 { font-size: 2em; }
+      .container { width: 90%; padding: 20px; }
     }
   </style>
 </head>
 <body>
+  <!-- The entire container handles the slow zoom & fade entrance seamlessly -->
   <div class="background-container">
-    <img
-      class="background-image"
-      src="https://i.kym-cdn.com/entries/icons/original/000/042/944/Warhammer_40_000__Mechanicus___Teaser_Trailer_0-49_screenshot.png"
-      alt="Background"
-    />
-    <div class="overlay">
+    
+    <!-- Your local image reference goes here -->
+    <img class="background-image" src="image_379f56.jpg" alt="Background" />
+    
+    <!-- Animated Layer: Red Eye Overglow -->
+    <div class="eye-glow"></div>
+
+    <!-- Animated Layer: Cybernetic Sparks -->
+    <div class="spark-container">
+      <div class="spark"></div>
+      <div class="spark"></div>
+      <div class="spark"></div>
+    </div>
+
+    <!-- UI Overlay Layer -->
+    <div class="overlay-ui">
       <div class="header">
         <h1>OCULUS</h1>
       </div>
@@ -176,6 +272,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </body>
 </html>
