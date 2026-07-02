@@ -16,15 +16,15 @@
       overflow: hidden;
     }
 
+    /* Container stays visible instantly so sparks/glows can render immediately */
     .background-container {
       position: relative;
       width: 100vw;
       height: 100vh;
       overflow: hidden;
-      opacity: 0;
-      animation: sceneFadeInZoom 10s ease-out forwards;
     }
 
+    /* Background image fades/zooms independently */
     .background-image {
       position: absolute;
       top: 0;
@@ -35,11 +35,13 @@
       display: block;
       z-index: 0;
       pointer-events: none;
+      opacity: 0;
+      animation: sceneFadeInZoom 10s ease-out forwards;
     }
 
     /* --- THE MECHANICUS EFFECTS --- */
     
-    /* Main Cyan Eye Flicker */
+    /* Main Cyan Eye Flicker (Your Custom Coordinates Preserved) */
     .eye-glow-blue {
       position: absolute;
       top: 46.5%; 
@@ -57,7 +59,7 @@
       pointer-events: none;
     }
 
-    /* Cybernetic Red Lens Glow (Aligned Leftwards) */
+    /* Cybernetic Red Lens Glow (Your Custom Coordinates Preserved) */
     .eye-glow-red {
       position: absolute;
       top: 58.2%; 
@@ -71,11 +73,11 @@
       border-radius: 50%;
       z-index: 1;
       mix-blend-mode: screen;
-      animation: eyeFlicker 0.8s infinite alternate-reverse; /* Offset rhythm from the blue eye */
+      animation: eyeFlicker 0.8s infinite alternate-reverse;
       pointer-events: none;
     }
 
-    /* Sparks adjusted to burst out right from the red cybernetic casing */
+    /* Sparks container */
     .spark-container {
       position: absolute;
       top: 54%;
@@ -96,9 +98,16 @@
       opacity: 0;
     }
 
-    .spark:nth-child(1) { animation: sparkBurst1 3.5s infinite 0.2s; }
-    .spark:nth-child(2) { animation: sparkBurst2 3.5s infinite 1.5s; }
-    .spark:nth-child(3) { animation: sparkBurst3 3.5s infinite 2.6s; }
+    /* Distributed timing logic for all 9 sparks to keep density constant */
+    .spark:nth-child(1) { animation: sparkBurst1 3.5s infinite 0.1s; }
+    .spark:nth-child(2) { animation: sparkBurst2 3.5s infinite 0.5s; }
+    .spark:nth-child(3) { animation: sparkBurst3 3.5s infinite 0.9s; }
+    .spark:nth-child(4) { animation: sparkBurst1 3.5s infinite 1.3s; }
+    .spark:nth-child(5) { animation: sparkBurst2 3.5s infinite 1.7s; }
+    .spark:nth-child(6) { animation: sparkBurst3 3.5s infinite 2.1s; }
+    .spark:nth-child(7) { animation: sparkBurst1 3.5s infinite 2.5s; }
+    .spark:nth-child(8) { animation: sparkBurst2 3.5s infinite 2.9s; }
+    .spark:nth-child(9) { animation: sparkBurst3 3.5s infinite 3.3s; }
 
     /* --- ANIMATIONS --- */
 
@@ -255,6 +264,12 @@
     <div class="eye-glow-red"></div>
 
     <div class="spark-container">
+      <div class="spark"></div>
+      <div class="spark"></div>
+      <div class="spark"></div>
+      <div class="spark"></div>
+      <div class="spark"></div>
+      <div class="spark"></div>
       <div class="spark"></div>
       <div class="spark"></div>
       <div class="spark"></div>
