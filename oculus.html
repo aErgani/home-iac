@@ -323,8 +323,21 @@
   <!-- Browser Autoplay Bypass Listener -->
   <script>
     window.addEventListener('DOMContentLoaded', () => {
-        const audio = document.getElementById('your-audio-element-id'); // or your AudioContext setup
-        audio.play().catch(err => console.log("Engine still blocked it:", err));
+        const audio = document.getElementById('mechanicus-ambient');
+        if (audio) {
+            // Attempt policy-approved autoplay immediately
+            audio.play().catch(err => {
+                console.log("Autoplay policy restricted instant load. Awaiting fallback interaction gesture.", err);
+                
+                // Fallback: If policy failed, start audio on the very first document click
+                const triggerFallback = () => {
+                    audio.play().then(() => {
+                        document.removeEventListener('click', triggerFallback);
+                    }).catch(e => console.error("Audio execution failed entirely:", e));
+                };
+                document.addEventListener('click', triggerFallback);
+            });
+        }
     });
   </script>
 </body>
